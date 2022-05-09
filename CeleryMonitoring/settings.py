@@ -126,5 +126,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_WORKER_CONCURRENCY = 12
+CELERY_TRACK_STARTED = True
+
 CELERY_RESULT_BACKEND = 'django-db'
-CELERY_CACHE_BACKEND  = 'django-cache'
+CELERY_CACHE_BACKEND = 'django-cache'

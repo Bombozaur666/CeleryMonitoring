@@ -1,6 +1,4 @@
-from __future__ import  absolute_import, unicode_literals
 import os
-import time
 
 from celery import Celery
 
@@ -22,7 +20,7 @@ app.conf.beat_schedule = {
     'every-5-second': {
         'task': 'MonitoringManager.tasks.printInChat',
         'schedule': 5,
-        'args': ('hej' + str(time.localtime()),)
+        'args': ('hej',)
     }
 
 }

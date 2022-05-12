@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Websites
 from .forms import WebsitePostForm
 from django.contrib import messages
@@ -54,6 +54,9 @@ def edit_website(request, number):
 
 
 def not_working_websites(request):
+    Sites = Websites.objects.filter(isWorking=False)
+
     render(request,
-           'notWorkingWebsites.html'
+           'notWorkingWebsites.html',
+           {'Sites':Sites}
            )

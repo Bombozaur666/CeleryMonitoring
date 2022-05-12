@@ -11,7 +11,28 @@
     <title>CeleryMonitoring | {% block title %}{% endblock title %}</title>
   </head>
   <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'MonitoringManager:home-view' %}">CeleryMonitor</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'MonitoringManager:websites-list' %}">Monitoring <span class="sr-only">(current)</span></a>
+          </li>
+         <li class="nav-item active">
+            <a class="nav-link" href="{% url 'MonitoringManager:websites-add' %}">Dodaj domenę <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'MonitoringManager:home-view' %}">Domeny z problemami <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
    <div class="container">
+
        {% block content %}
 
        {% endblock content %}

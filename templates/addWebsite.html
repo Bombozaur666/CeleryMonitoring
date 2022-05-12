@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Dodaj domenę
+{% endblock title %}
+
+
+{% block content %}
+    <h1>Dodaj domenę</h1>
+     <form method="post">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <p>
+                    <input type="submit" value="Dodaj domenę" class="btn btn-primary">
+                </p>
+     </form>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

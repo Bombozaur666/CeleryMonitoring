@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'MonitoringManager',
     'django_celery_results',
     'django_celery_beat',
-]
+    'crispy_forms',
 
+]
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

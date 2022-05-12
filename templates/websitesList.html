@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+    Lista domen
+{% endblock title %}
+
+
+{% block content %}
+    <p>Lista domen</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Strona</th>
+          <th scope="col">Adres URL</th>
+          <th scope="col">Interwał sprawdzania</th>
+          <th scope="col">Czy działa</th>
+            <th scope="col">Edycja</th>
+
+        </tr>
+      </thead>
+      <tbody>
+    {% for site in Sites %}
+        <tr>
+            <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
+          <td>{{ site.urlAddress }}</td>
+          <td>{{ site.get_intervals_display }}</td>
+            {% if site %}
+                 <td>TAK</td>
+            {% else %}
+                <td>NIE</td>
+            {% endif %}
+            <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
+        </tr>
+    {% endfor %}
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

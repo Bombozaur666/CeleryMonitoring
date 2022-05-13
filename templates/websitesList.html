@@ -23,7 +23,12 @@
             <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
           <td>{{ site.urlAddress }}</td>
           <td>{{ site.get_intervals_display }}</td>
-            <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
+          {% if site.isWorking %}
+            <td>TAK</td>
+          {% else %}
+            <td>NIE</td>
+          {% endif %}
+          <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
         </tr>
     {% endfor %}
 

@@ -1,8 +1,11 @@
 import os
 
 from celery import Celery
+from celery.schedules import crontab
 
 # Set the default Django settings module for the 'celery' program.
+
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CeleryMonitoring.settings')
 
 app = Celery('CeleryMonitoring')
@@ -17,13 +20,38 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'every-5-second': {
-        'task': 'MonitoringManager.tasks.printInChat',
+    'every-1-minute': {
+        'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 5,
-        'args': ('hej',)
+        'args':('01')
     }
-
 }
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+"""
+app.conf.beat_schedule = {
+    'every-5-minutes': {
+        'task': 'MonitoringManager.tasks.checkWebsites',
+        'schedule': 300,
+        'args': ('5MIN')
+    }
+}
+app.conf.beat_schedule = {
+    'every-15-minutes': {
+        'task': 'MonitoringManager.tasks.checkWebsites',
+        'schedule': 900,
+        'args': ('15MIN')
+    }
+}
+app.conf.beat_schedule = {
+    'every-30-minutes': {
+        'task': 'MonitoringManager.tasks.checkWebsites',
+        'schedule': 1800,
+        'args': ('30MIN',)
+    }
+}
+app.conf.beat_schedule = {
+    'every-60-minutes': {
+        'task': 'MonitoringManager.tasks.checkWebsites',
+        'schedule': 3600,
+        'args': ('60MIN',)
+    }
+}"""

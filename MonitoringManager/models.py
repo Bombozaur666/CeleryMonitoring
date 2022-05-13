@@ -2,19 +2,23 @@ from django.db import models
 
 
 # Create your models here.
+# My own model Manager for easier filtering
+
+
+
 class Websites(models.Model):
     name = models.CharField(max_length=200)
     urlAddress = models.CharField(max_length=1000)
     TIME_INTERVALS = [
-        ('1MIN', '1 minute'),
-        ('5MIN', '5 minutes'),
-        ('15MIN', '15 minutes'),
-        ('30MIN', '30 minutes'),
-        ('60MIN', '60 minutes'),
+        ('01', '1 minute'),
+        ('05', '5 minutes'),
+        ('15', '15 minutes'),
+        ('30', '30 minutes'),
+        ('60', '60 minutes'),
     ]
     intervals = models.CharField(choices=TIME_INTERVALS,
                                  max_length=5,
-                                 default='1MIN', )
+                                 default='01', )
     isWorking = models.BooleanField(default=True,
                                     blank=True)
 
@@ -37,4 +41,3 @@ class Events(models.Model):
 
     class Meta:
         ordering = ('websiteId',)
-

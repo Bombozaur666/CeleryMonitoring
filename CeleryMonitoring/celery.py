@@ -22,36 +22,35 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'every-1-minute': {
         'task': 'MonitoringManager.tasks.checkWebsites',
-        'schedule': 5,
+        'schedule': 60,
         'args':('01')
     }
 }
-"""
 app.conf.beat_schedule = {
     'every-5-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 300,
-        'args': ('5MIN')
+        'args': ('05')
     }
 }
 app.conf.beat_schedule = {
     'every-15-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 900,
-        'args': ('15MIN')
+        'args': ('15')
     }
 }
 app.conf.beat_schedule = {
     'every-30-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 1800,
-        'args': ('30MIN',)
+        'args': ('30',)
     }
 }
 app.conf.beat_schedule = {
     'every-60-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 3600,
-        'args': ('60MIN',)
+        'args': ('60',)
     }
-}"""
+}

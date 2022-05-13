@@ -13,8 +13,8 @@
           <th scope="col">Adres URL</th>
           <th scope="col">Interwał sprawdzania</th>
           <th scope="col">Czy działa</th>
-            <th scope="col">Edycja</th>
-
+          <th scope="col">Edycja</th>
+          <th>Usuń</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +29,7 @@
             <td>NIE</td>
           {% endif %}
           <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
+          <th>Usuń</th>
         </tr>
     {% endfor %}
 

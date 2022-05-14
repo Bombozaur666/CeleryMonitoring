@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}
     Edytuj domenę
 {% endblock title %}
 
 
 {% block content %}
-    <p>Edycja strony nr {{ number }}</p>
+    <h1>Edytuj domenę {{ site }}</h1>
+     <form method="post">
+                {{ form|crispy }}
+                {% csrf_token %}
+                <p>
+                    <input type="submit" value="Edytuj domenę" class="btn btn-primary">
+                </p>
+     </form>
 {% endblock content %}
 
 {% block scripts %}

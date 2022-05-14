@@ -5,10 +5,11 @@ from django.db import models
 # My own model Manager for easier filtering
 
 
-
 class Websites(models.Model):
-    name = models.CharField(max_length=200)
-    urlAddress = models.CharField(max_length=1000)
+    name = models.CharField("Nazwa domeny",
+                            max_length=200)
+    urlAddress = models.CharField("Adres URL",
+                                  max_length=1000)
     TIME_INTERVALS = [
         ('01', '1 minute'),
         ('05', '5 minutes'),
@@ -16,17 +17,19 @@ class Websites(models.Model):
         ('30', '30 minutes'),
         ('60', '60 minutes'),
     ]
-    intervals = models.CharField(choices=TIME_INTERVALS,
+    intervals = models.CharField("Interwały czasowe",
+                                 choices=TIME_INTERVALS,
                                  max_length=5,
                                  default='01', )
-    isWorking = models.BooleanField(default=True,
+    isWorking = models.BooleanField("Czy działa",
+                                    default=True,
                                     blank=True)
 
     def __str__(self):
         return str(self.id)
 
     class Meta:
-        ordering = ('urlAddress',)
+        ordering = ('intervals', 'name')
 
 
 class Events(models.Model):
@@ -41,3 +44,6 @@ class Events(models.Model):
 
     class Meta:
         ordering = ('websiteId',)
+
+
+

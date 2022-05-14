@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 from .models import Websites
 from .forms import WebsitePostForm
 from django.contrib import messages
+from urllib.parse import urlparse
 
 
 # Create your views here.
@@ -13,11 +14,10 @@ def home_view(request):
 
 
 def websites_list(request):
-    Sites = Websites.objects.all()
-
+    sites = get_list_or_404(Websites)
     return render(request,
                   'websitesList.html',
-                  {'Sites': Sites}
+                  {'Sites': sites}
                   )
 
 
@@ -25,12 +25,13 @@ def add_website(request):
     if request.method == 'POST':
         form = WebsitePostForm(request.POST)
         if form.is_valid():
+
             if Websites.objects.filter(urlAddress=form.cleaned_data['urlAddress'],
                                        intervals=form.cleaned_data['intervals']):
-                messages.warning(request, 'Już dodano stronę z takim interwałem')
+                messages.error(request, 'Już dodano stronę z takim interwałem')
             else:
                 form.save()
-                messages.info(request, 'Pomyślnie dodano domenę.')
+                messages.success(request, 'Pomyślnie dodano domenę.')
                 return redirect('/websites')
     else:
         form = WebsitePostForm()
@@ -47,16 +48,32 @@ def check_website(request, number):
 
 
 def edit_website(request, number):
+    site = get_object_or_404(Websites, id=number)
+
+    if request.method == 'POST':
+        form = WebsitePostForm(request.POST)
+        if form.is_valid():
+            old_site = get_object_or_404(Websites, id=number)
+            old_site.name = form.cleaned_data['name']
+            old_site.intervals = form.cleaned_data['intervals']
+            old_site.urlAddress = form.cleaned_data['urlAddress']
+            old_site.isWorking = form.cleaned_data['isWorking']
+            old_site.save()
+            return redirect('MonitoringManager:websites-list')
+    else:
+        form = WebsitePostForm(initial={'name': site.name,
+                                    'urlAddress': site.urlAddress,
+                                    'intervals': site.intervals})
     return render(request,
                   'editWebsite.html',
-                  {'number': number}
+                  {'site': site.name,
+                   'form': form}
                   )
 
 
 def not_working_websites(request):
-    Sites = Websites.objects.filter(isWorking=False)
-
+    sites = Websites.objects.filter(isWorking=False)
     render(request,
            'notWorkingWebsites.html',
-           {'Sites':Sites}
+           {'Sites': sites}
            )

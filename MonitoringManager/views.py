@@ -14,7 +14,7 @@ def home_view(request):
 
 
 def websites_list(request):
-    sites = get_list_or_404(Websites)
+    sites = Websites.objects.all()
     return render(request,
                   'websitesList.html',
                   {'Sites': sites}
@@ -61,8 +61,8 @@ def edit_website(request, id=None):
             return redirect('MonitoringManager:websites-list')
     else:
         form = WebsitePostForm(initial={'name': site.name,
-                                    'urlAddress': site.urlAddress,
-                                    'intervals': site.intervals})
+                                        'urlAddress': site.urlAddress,
+                                        'intervals': site.intervals})
     return render(request,
                   'editWebsite.html',
                   {'site': site.name,
@@ -78,7 +78,7 @@ def delete_website(request, id=None):
 
 def not_working_websites(request):
     sites = Websites.objects.filter(isWorking=False)
-    render(request,
-           'notWorkingWebsites.html',
-           {'Sites': sites}
-           )
+    return render(request,
+                  'notWorkingWebsites.html',
+                  {'Sites': sites}
+                  )

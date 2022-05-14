@@ -26,6 +26,7 @@ app.conf.beat_schedule = {
         'args':('01')
     }
 }
+"""
 app.conf.beat_schedule = {
     'every-5-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
@@ -44,13 +45,13 @@ app.conf.beat_schedule = {
     'every-30-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 1800,
-        'args': ('30',)
+        'args': ('30')
     }
 }
 app.conf.beat_schedule = {
     'every-60-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 3600,
-        'args': ('60',)
+        'args': ('60')
     }
-}
+}"""

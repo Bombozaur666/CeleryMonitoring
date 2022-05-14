@@ -1,11 +1,11 @@
 from __future__ import absolute_import, unicode_literals
-from .models import Websites
+from .models import Websites, Events
 from celery import shared_task
 import requests
 
 
 @shared_task
-def checkWebsites(*args):
+def checkWebsites(*args, **kwargs):
     concatenate = "".join(args)
     websites = Websites.objects.get_queryset().filter(intervals=concatenate)
     for site in websites:
@@ -17,3 +17,4 @@ def checkWebsites(*args):
         else:
             site.isWorking = False
             site.save()
+            Events.objects.create(websiteId=site.id, returnCode=response.status_code)

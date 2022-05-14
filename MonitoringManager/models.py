@@ -36,8 +36,8 @@ class Events(models.Model):
     websiteId = models.ForeignKey(Websites,
                                   on_delete=models.CASCADE,
                                   related_name='events')
-    returnCode = models.CharField(max_length=3)
-    time = models.DateTimeField(auto_now_add=True)
+    returnCode = models.CharField("Kod błędu", max_length=3)
+    time = models.DateTimeField("Data zdażenia", auto_now_add=True)
 
     def __str__(self):
         return str(self.id)

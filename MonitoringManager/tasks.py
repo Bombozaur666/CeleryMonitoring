@@ -17,4 +17,4 @@ def checkWebsites(*args, **kwargs):
         else:
             site.isWorking = False
             site.save()
-            Events.objects.create(websiteId=site.id, returnCode=response.status_code)
+            Events.objects.create(websiteId=site, returnCode=response.status_code)

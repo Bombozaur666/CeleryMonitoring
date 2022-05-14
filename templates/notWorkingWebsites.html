@@ -12,9 +12,6 @@
           <th scope="col">Strona</th>
           <th scope="col">Adres URL</th>
           <th scope="col">Interwał sprawdzania</th>
-          <th>Data ostatniego sprawdzenia</th>
-          <th scope="col">Ostatni kod błędu</th>
-
         </tr>
       </thead>
       <tbody>
@@ -23,12 +20,6 @@
             <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
           <td>{{ site.urlAddress }}</td>
           <td>{{ site.get_intervals_display }}</td>
-            {% if site.isWorkingi %}
-                 <td>TAK</td>
-            {% else %}
-                <td>NIE</td>
-            {% endif %}
-            <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
         </tr>
     {% endfor %}
 {% endblock content %}

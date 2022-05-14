@@ -5,7 +5,22 @@
 
 
 {% block content %}
-    <p>Domena nr {{ id }}</p>
+    <p>Logi domeny {{ name }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Data sprawdzenia</th>
+          <th scope="col">Kod błędu</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for event in events %}
+        <tr>
+          <td>{{ event.time }}</td>
+          <td>{{ event.returnCode}}</td>
+        {{ event.websiteId.name }}
+        </tr>
+    {% endfor %}
 {% endblock content %}
 
 {% block scripts %}

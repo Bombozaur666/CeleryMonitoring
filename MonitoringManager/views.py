@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
-from .models import Websites
+from .models import Websites, Events
 from .forms import WebsitePostForm
 from django.contrib import messages
 from urllib.parse import urlparse
@@ -41,9 +41,12 @@ def add_website(request):
 
 
 def check_website(request, id=None):
+    name = get_object_or_404(Websites, id=id).name
+    events = Events.objects.filter(websiteId=id)
     return render(request,
                   'checkWebsite.html',
-                  {'id': id}
+                  {'events': events,
+                   'name': name}
                   )
 
 
@@ -78,6 +81,7 @@ def delete_website(request, id=None):
 
 def not_working_websites(request):
     sites = Websites.objects.filter(isWorking=False)
+
     return render(request,
                   'notWorkingWebsites.html',
                   {'Sites': sites}

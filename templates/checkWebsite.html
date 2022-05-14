@@ -10,7 +10,8 @@
       <thead>
         <tr>
           <th>Data sprawdzenia</th>
-          <th scope="col">Kod błędu</th>
+          <th scope="col">Kod błędu</th>+
+          <th>Suma kontrolna</th>
         </tr>
       </thead>
       <tbody>
@@ -18,7 +19,7 @@
         <tr>
           <td>{{ event.time }}</td>
           <td>{{ event.returnCode}}</td>
-        {{ event.websiteId.name }}
+          <td>{{ event.md5 }}</td>
         </tr>
     {% endfor %}
 {% endblock content %}

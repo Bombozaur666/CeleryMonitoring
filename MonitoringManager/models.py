@@ -40,6 +40,7 @@ class Events(models.Model):
                                   related_name='events')
     returnCode = models.CharField("Kod błędu", max_length=3)
     time = models.DateTimeField("Data zdażenia", auto_now_add=True)
+    md5 = models.CharField(max_length=128)
 
     def __str__(self):
         return str(self.id)

@@ -6,3 +6,4 @@ class WebsitePostForm(forms.ModelForm):
     class Meta:
         model = Websites
         fields = ('name', 'urlAddress', 'intervals', 'isWorking')
+

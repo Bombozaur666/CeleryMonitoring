@@ -1,3 +1,4 @@
+from django.core.validators import URLValidator
 from django.db import models
 
 
@@ -8,8 +9,9 @@ from django.db import models
 class Websites(models.Model):
     name = models.CharField("Nazwa domeny",
                             max_length=200)
-    urlAddress = models.CharField("Adres URL",
-                                  max_length=1000)
+    urlAddress = models.URLField("Adres URL",
+                                  max_length=1000
+                                 )
     TIME_INTERVALS = [
         ('01', '1 minute'),
         ('05', '5 minutes'),

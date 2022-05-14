@@ -12,14 +12,18 @@
           <th scope="col">Strona</th>
           <th scope="col">Adres URL</th>
           <th scope="col">Interwał sprawdzania</th>
+          <th scope="col">Ostatni kod błędu</th>
+          <th scope="col">Czas wystąpienia</th>
         </tr>
       </thead>
       <tbody>
     {% for site in Sites %}
         <tr>
             <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
-          <td>{{ site.urlAddress }}</td>
-          <td>{{ site.get_intervals_display }}</td>
+          <td>{{ site.websiteId.urlAddress }}</td>
+          <td>{{ site.websiteId.get_intervals_display }}</td>
+          <td>{{ site.returnCode }}</td>
+          <td>{{ site.time }}</td>
         </tr>
     {% endfor %}
 {% endblock content %}

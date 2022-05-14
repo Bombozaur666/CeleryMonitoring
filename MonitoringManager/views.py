@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Websites, Events
 from .forms import WebsitePostForm
 from django.contrib import messages
-from urllib.parse import urlparse
 
 
 # Create your views here.
@@ -25,9 +24,9 @@ def add_website(request):
     if request.method == 'POST':
         form = WebsitePostForm(request.POST)
         if form.is_valid():
-
             if Websites.objects.filter(urlAddress=form.cleaned_data['urlAddress'],
                                        intervals=form.cleaned_data['intervals']):
+
                 messages.error(request, 'Już dodano stronę z takim interwałem')
             else:
                 form.save()
@@ -74,14 +73,13 @@ def edit_website(request, id=None):
 
 
 def delete_website(request, id=None):
-    object = get_object_or_404(Websites, id=id)
-    object.delete()
+    get_object_or_404(Websites, id=id).delete()
     return redirect('MonitoringManager:websites-list')
 
 
 def not_working_websites(request):
-    sites = Websites.objects.filter(isWorking=False)
-
+    sites = Events.objects.all().distinct('websiteId')
+    #sites = Websites.objects.filter(isWorking=False)
     return render(request,
                   'notWorkingWebsites.html',
                   {'Sites': sites}

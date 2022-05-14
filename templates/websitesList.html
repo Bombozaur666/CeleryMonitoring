@@ -28,8 +28,8 @@
           {% else %}
             <td>NIE</td>
           {% endif %}
-          <td><a href="{% url 'MonitoringManager:websites-edit' site.id%}" >Edytuj</a></td>
-          <th>Usuń</th>
+          <td><a href="{% url 'MonitoringManager:websites-edit' site.id %}" >Edytuj</a></td>
+          <th><a href="{% url 'MonitoringManager:websites-delete' site.id %}">Usuń</a></th>
         </tr>
     {% endfor %}
 

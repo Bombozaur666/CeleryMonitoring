@@ -40,20 +40,19 @@ def add_website(request):
                   {'form': form})
 
 
-def check_website(request, number):
+def check_website(request, id=None):
     return render(request,
                   'checkWebsite.html',
-                  {'number': number}
+                  {'id': id}
                   )
 
 
-def edit_website(request, number):
-    site = get_object_or_404(Websites, id=number)
-
+def edit_website(request, id=None):
+    site = get_object_or_404(Websites, id=id)
     if request.method == 'POST':
         form = WebsitePostForm(request.POST)
         if form.is_valid():
-            old_site = get_object_or_404(Websites, id=number)
+            old_site = get_object_or_404(Websites, id=id)
             old_site.name = form.cleaned_data['name']
             old_site.intervals = form.cleaned_data['intervals']
             old_site.urlAddress = form.cleaned_data['urlAddress']
@@ -69,6 +68,12 @@ def edit_website(request, number):
                   {'site': site.name,
                    'form': form}
                   )
+
+
+def delete_website(request, id=None):
+    object = get_object_or_404(Websites, id=id)
+    object.delete()
+    return redirect('MonitoringManager:websites-list')
 
 
 def not_working_websites(request):

@@ -24,35 +24,29 @@ app.conf.beat_schedule = {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 60,
         'args': ('01')
-    }
-}
+    },
 
-app.conf.beat_schedule = {
     'every-5-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 300,
         'args': ('05')
-    }
-}
+    },
 
-app.conf.beat_schedule = {
     'every-15-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 900,
         'args': ('15')
-    }
-}
-app.conf.beat_schedule = {
+    },
+
     'every-30-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 1800,
         'args': ('30')
-    }
-}
-app.conf.beat_schedule = {
+    },
+
     'every-60-minutes': {
         'task': 'MonitoringManager.tasks.checkWebsites',
         'schedule': 3600,
         'args': ('60')
-    }
+    },
 }

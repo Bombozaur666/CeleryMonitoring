@@ -39,7 +39,7 @@ def add_website(request):
             if Websites.objects.filter(urlAddress=form.cleaned_data['urlAddress'],
                                        intervals=form.cleaned_data['intervals']):
 
-                messages.error(request, 'Już dodano stronę z takim interwałem')
+                messages.info(request, 'Już dodano stronę z takim interwałem')
             else:
                 form.save()
                 messages.success(request, 'Pomyślnie dodano domenę.')

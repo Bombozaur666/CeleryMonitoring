@@ -80,8 +80,8 @@ DATABASE = {...}
 - Utworzenie zmiennej srodowiskowej 'DJANGO_SETTINGS_MODULE' w powłoce komendą:
 ```bash
 export DJANGO_SETTINGS_MODULE=CeleryMonitor.settings.pro
-By móc łatwiej korzystać z aplikacji - nie dodawać --settings przy większosći poleceń z 'manage.py'
 ```
+By móc łatwiej korzystać z aplikacji - nie dodawać --settings przy większosći poleceń z 'manage.py'
 
 - użycie komendy 
 ```bash 

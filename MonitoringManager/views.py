@@ -3,6 +3,8 @@ from .models import Websites, Events
 from .forms import WebsitePostForm
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from rest_framework import viewsets
+from .serializers import WebsitesSerializer, EventsSerializer
 
 
 # Create your views here.
@@ -78,7 +80,7 @@ def edit_website(request, id=None):
             old_site.urlAddress = form.cleaned_data['urlAddress']
             old_site.isWorking = form.cleaned_data['isWorking']
             old_site.save()
-            return redirect('MonitoringManager:websites-list')
+            return redirect('MonitoringManager:list-of-sites')
     else:
         form = WebsitePostForm(initial={'name': site.name,
                                         'urlAddress': site.urlAddress,
@@ -92,7 +94,7 @@ def edit_website(request, id=None):
 
 def delete_website(request, id=None):
     get_object_or_404(Websites, id=id).delete()
-    return redirect('MonitoringManager:websites-list')
+    return redirect('MonitoringManager:list-of-sites')
 
 
 def not_working_websites(request):
@@ -109,3 +111,20 @@ def not_working_websites(request):
                   'notWorkingWebsites.html',
                   {'sites': sites}
                   )
+
+
+class WebsiteViewSet(viewsets.ModelViewSet):
+    queryset = Websites.objects.all()
+    serializer_class = WebsitesSerializer
+
+
+class NotWorkingWebsiteViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Websites.objects.filter(isWorking=False)
+    serializer_class = WebsitesSerializer
+
+
+class EventViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Events.objects.all()
+    serializer_class = EventsSerializer
+
+

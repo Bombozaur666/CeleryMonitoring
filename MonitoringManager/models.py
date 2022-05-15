@@ -24,7 +24,7 @@ class Websites(models.Model):
                                  max_length=5,
                                  default='01', )
     isWorking = models.BooleanField("Czy działa",
-                                    default=True,
+                                    default=False,
                                     blank=True)
 
     def __str__(self):

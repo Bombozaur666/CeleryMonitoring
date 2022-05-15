@@ -5,10 +5,12 @@ from .models import Websites, Events
 class WebsitesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Websites
-        fields = ['name', 'UrlAddress', 'intervals', 'isWorking']
+        fields = ['id', 'name', 'urlAddress', 'intervals', 'isWorking']
 
 
 class EventsSerializer(serializers.HyperlinkedModelSerializer):
+    websiteId = WebsitesSerializer()
+
     class Meta:
         model = Events
-        fields = ['websiteId', 'returnCode']
+        fields = ['id', 'websiteId', 'returnCode', 'md5']

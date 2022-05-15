@@ -78,9 +78,8 @@ def delete_website(request, id=None):
 
 
 def not_working_websites(request):
-    sites = Events.objects.all().distinct('websiteId')
-    #sites = Websites.objects.filter(isWorking=False)
+    sites = Events.objects.filter(websiteId__isWorking__exact=False).order_by('websiteId_id').distinct('websiteId_id')
     return render(request,
                   'notWorkingWebsites.html',
-                  {'Sites': sites}
+                  {'sites': sites}
                   )

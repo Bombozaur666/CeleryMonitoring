@@ -10,18 +10,28 @@
       <thead>
         <tr>
           <th>Data sprawdzenia</th>
-          <th scope="col">Kod błędu</th>+
+          <th scope="col">Kod błędu</th>
           <th>Suma kontrolna</th>
         </tr>
       </thead>
       <tbody>
     {% for event in events %}
-        <tr>
-          <td>{{ event.time }}</td>
-          <td>{{ event.returnCode}}</td>
-          <td>{{ event.md5 }}</td>
-        </tr>
+        {% if event.returnCode < 300 %}
+            <tr bgcolor="#7fff00">
+                <td>{{ event.time|date:'Y-m-d H:i:s' }}</td>
+                <td>{{ event.returnCode}}</td>
+                <td>{{ event.md5 }}</td>
+            </tr>
+        {% else %}
+            <tr bgcolor="red">
+                <td>{{ event.time |date:'Y-m-d H:i:s'}}</td>
+                <td>{{ event.returnCode}}</td>
+                <td>{{ event.md5 }}</td>
+            </tr>
+        {% endif %}
     {% endfor %}
+      </tbody>
+    </table>
 {% endblock content %}
 
 {% block scripts %}

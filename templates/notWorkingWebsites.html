@@ -17,15 +17,17 @@
         </tr>
       </thead>
       <tbody>
-    {% for site in Sites %}
+    {% for site in sites %}
         <tr>
-            <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
+          <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.websiteId.name }}</a></td>
           <td>{{ site.websiteId.urlAddress }}</td>
           <td>{{ site.websiteId.get_intervals_display }}</td>
           <td>{{ site.returnCode }}</td>
-          <td>{{ site.time }}</td>
+          <td>{{ site.time|date:'Y-m-d H:i:s'}}</td>
         </tr>
     {% endfor %}
+      </tbody>
+    </table>
 {% endblock content %}
 
 {% block scripts %}

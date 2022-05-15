@@ -46,7 +46,7 @@ class Events(models.Model):
         return str(self.id)
 
     class Meta:
-        ordering = ('websiteId', 'time')
+        ordering = ('websiteId', '-time')
 
 
 

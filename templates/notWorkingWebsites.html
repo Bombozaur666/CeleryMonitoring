@@ -19,7 +19,7 @@
       <tbody>
     {% for site in sites %}
         <tr>
-          <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.websiteId.name }}</a></td>
+          <td><a href="{% url 'MonitoringManager:websites-check' site.websiteId.id %}" >{{ site.websiteId.name }}</a></td>
           <td>{{ site.websiteId.urlAddress }}</td>
           <td>{{ site.websiteId.get_intervals_display }}</td>
           <td>{{ site.returnCode }}</td>
@@ -28,6 +28,7 @@
     {% endfor %}
       </tbody>
     </table>
+    {% include "pagination.html" with page=sites %}
 {% endblock content %}
 
 {% block scripts %}

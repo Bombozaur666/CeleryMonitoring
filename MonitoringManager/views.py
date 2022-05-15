@@ -25,7 +25,7 @@ def websites_list(request):
         sites = paginator.page(paginator.num_pages)
     return render(request,
                   'websitesList.html',
-                  {'Sites': sites,
+                  {'sites': sites,
                    'page': page}
                   )
 
@@ -96,7 +96,15 @@ def delete_website(request, id=None):
 
 
 def not_working_websites(request):
-    sites = Events.objects.filter(websiteId__isWorking__exact=False).order_by('websiteId_id').distinct('websiteId_id')
+    all_sites = Events.objects.filter(websiteId__isWorking__exact=False).order_by('websiteId_id').distinct('websiteId_id')
+    paginator = Paginator(all_sites, 20)
+    page = request.GET.get('page')
+    try:
+        sites = paginator.page(page)
+    except PageNotAnInteger:
+        sites = paginator.page(1)
+    except EmptyPage:
+        sites = paginator.page(paginator.num_pages)
     return render(request,
                   'notWorkingWebsites.html',
                   {'sites': sites}

@@ -18,9 +18,9 @@
         </tr>
       </thead>
       <tbody>
-    {% for site in Sites %}
+    {% for site in sites %}
         <tr>
-            <td><a href="{% url 'MonitoringManager:websites-check' site.id%}" >{{ site.name }}</a></td>
+            <td><a href="{% url 'MonitoringManager:websites-check' site.id %}" >{{ site.name }}</a></td>
           <td>{{ site.urlAddress }}</td>
           <td>{{ site.get_intervals_display }}</td>
           {% if site.isWorking %}
@@ -35,7 +35,7 @@
       </tbody>
 
     </table>
- {% include "pagination.html" with page=Sites %}
+ {% include "pagination.html" with page=sites %}
 
 {% endblock content %}
 

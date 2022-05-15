@@ -32,6 +32,7 @@
     {% endfor %}
       </tbody>
     </table>
+     {% include "pagination.html" with page=events %}
 {% endblock content %}
 
 {% block scripts %}

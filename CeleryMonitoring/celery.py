@@ -22,8 +22,8 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'every-1-minute': {
         'task': 'MonitoringManager.tasks.checkWebsites',
-        'schedule': 5,
-        'args':('01')
+        'schedule': 60,
+        'args': ('01')
     }
 }
 """
@@ -54,4 +54,5 @@ app.conf.beat_schedule = {
         'schedule': 3600,
         'args': ('60')
     }
-}"""
+}
+"""

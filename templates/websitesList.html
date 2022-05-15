@@ -32,6 +32,10 @@
           <th><a href="{% url 'MonitoringManager:websites-delete' site.id %}" onclick="return confirm('Czy jesteś pewny?');">Usuń</a></th>
         </tr>
     {% endfor %}
+      </tbody>
+
+    </table>
+ {% include "pagination.html" with page=Sites %}
 
 {% endblock content %}
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Websites, Events
 from .forms import WebsitePostForm
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -13,10 +14,19 @@ def home_view(request):
 
 
 def websites_list(request):
-    sites = Websites.objects.all()
+    all_sites = Websites.objects.all()
+    paginator = Paginator(all_sites, 20)
+    page = request.GET.get('page')
+    try:
+        sites = paginator.page(page)
+    except PageNotAnInteger:
+        sites = paginator.page(1)
+    except EmptyPage:
+        sites = paginator.page(paginator.num_pages)
     return render(request,
                   'websitesList.html',
-                  {'Sites': sites}
+                  {'Sites': sites,
+                   'page': page}
                   )
 
 
@@ -41,7 +51,15 @@ def add_website(request):
 
 def check_website(request, id=None):
     name = get_object_or_404(Websites, id=id).name
-    events = Events.objects.filter(websiteId=id)
+    all_events = Events.objects.filter(websiteId=id)
+    paginator = Paginator(all_events, 20)
+    page = request.GET.get('page')
+    try:
+        events = paginator.page(page)
+    except PageNotAnInteger:
+        events = paginator.page(1)
+    except EmptyPage:
+        events = paginator.page(paginator.num_pages)
     return render(request,
                   'checkWebsite.html',
                   {'events': events,

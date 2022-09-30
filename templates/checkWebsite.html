@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block meta %}
+    <meta http-equiv="refresh" content="5">
+{% endblock meta %}
 {% block title %}
     Sprawdź domenę
 {% endblock title %}
@@ -16,7 +19,7 @@
       </thead>
       <tbody>
     {% for event in events %}
-        {% if event.returnCode < 300 %}
+        {% if event.md5 == '14' %}
             <tr bgcolor="#7fff00">
                 <td>{{ event.time|date:'Y-m-d H:i:s' }}</td>
                 <td>{{ event.returnCode}}</td>
